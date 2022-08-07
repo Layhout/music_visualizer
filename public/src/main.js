@@ -114,7 +114,7 @@ const lyrics = [
     },
 ]
 
-document.querySelector("video").addEventListener("canplaythrough", _ => { loader.style.display = "none" });
+window.onload = _ => { loader.style.display = "none" };
 
 for (let i = 0; i < num_of_bars; i++) {
     allDiv += `<div class="bar _${i}"></div>`;
