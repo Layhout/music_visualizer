@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Music Visualizer</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body data-guide="false" data-dm="false">
+    <section class="loader_container" id="loader">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </section>
+
+    <video src="./static/beach_background.mp4" autoplay loop muted></video>
+
+    <main>
+        <section class="bars_and_info">
+            <div class="bar_container _1"></div>
+            <div class="bar_container _2"></div>
+            <div class="bar_container _3"></div>
+            <div class="bar_container _4"></div>
+            <div class="music_detail">
+                <h3 class="music_title" id="">In The Mood</h3>
+                <h5 class="timer" id="timer">0:00 / 0:00</h5>
+            </div>
+        </section>
+        <section class="lyrics" id="lyric_container">
+            <div class="ani_container">
+                <div>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </section>
+
+        <audio src="static/in_the_mood.mp3" id="audio_for_visual"></audio>
+        <audio src="static/in_the_mood.mp3" id="audio_for_sound"></audio>
+    </main>
+
+    <header>
+        <h1 class="title" id="music_title">Thomas Irwin – In The Mood</h1>
+        <button onclick="start()">
+            <img src="static/media_play.png" alt="btn_play">
+        </button>
+        <div class="action">
+            <div class="guide" data-switch="false" onclick="handleSwitch(this)">
+                <label>Guide:</label>
+                <div>
+                    <div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="choose_your_own_music">
+                <label for="music_file">select your own music.</label>
+                <input type="file" id="music_file">
+            </div>
+            <p>
+                Play with sound on for better experience. <br>
+                <span style="color: red;">Warning:</span> This site is better to run PC then Phone.
+            </p>
+        </div>
+    </header>
+
+    <footer>
+        <div>
+            <h1 id="">Thanks for visiting!</h1>
+            <span onclick="location.reload()">Play again?</span>
+        </div>
+        <div class="credit">
+            <a href="https://youtu.be/80dqbe39u7Q" target="_blank">
+                <img src="static/cover.png" alt="">
+                <h3>go to the original video.</h3>
+            </a>
+        </div>
+        <div>
+            <h3>please check out my other stuff!</h3>
+            <div class="links">
+                <div>
+                    <a href="https://chea-layhout.web.app/" target="_blank">
+                        <img src="static/Asset 3.png" alt="">
+                        <p>my website</p>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://github.com/Layhout" target="_blank">
+                        <img src="static/github.png" alt="" style="filter: invert(1);">
+                        <p>my github</p>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://chea-layhout.web.app/" target="_blank">
+                        <img src="static/facebook.png" alt="" style="filter: invert(1);">
+                        <p>my facebook</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/main.js"></script>
+</body>
+
+</html>
