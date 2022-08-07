@@ -128,7 +128,7 @@ let totalMin = null, totalSec = null;
 av.addEventListener("canplaythrough", _ => {
     totalSec = av.duration % 60;
     totalMin = ((av.duration - totalSec) / 60);
-    totalSec = totalSec.toString().substring(0, 2).padStart(2, "0");
+    totalSec = totalSec.toString().split(".")[0].padStart(2, "0");
     document.querySelector("#timer").innerHTML = `0:00 / ${totalMin}:${totalSec}`;
 });
 
@@ -196,8 +196,9 @@ const timer = () => {
             wrapper.classList.add("long_fade_in");
         };
         if (min === 0 && sec === 59) {
+            wrapper.classList.remove("long_fade_in");
             wrapper.classList.add("fade_out");
-            setTimeout(_ => { wrapper.classList.remove("long_fade_in", "fade_out") }, 5000)
+            setTimeout(_ => { wrapper.classList.remove("fade_out") }, 5000)
         }
         if ((min === 1 && sec === 45)) {
             lc.innerHTML = "";
@@ -247,3 +248,19 @@ fi.addEventListener("change", function () {
     as.load();
     loader.style.display = "none";
 });
+
+const playAgain = _ => {
+    document.querySelector("main").classList.remove("fade_out");
+    wrapper.classList.remove("short_fade_in");
+    document.querySelector("footer").classList.remove("fade_in_go_up");
+    document.querySelector("footer").classList.add("fade_out_go_down");
+    setTimeout(_ => {
+        document.querySelector("footer").style.display = "none";
+        document.querySelector("footer").classList.remove("fade_in_go_up");
+    }, 5000);
+    setTimeout(_ => {
+        timer();
+        av.play();
+        as.play();
+    }, 1000);
+}
