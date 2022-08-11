@@ -6,7 +6,10 @@ const barContainers = document.querySelectorAll(".bar_container");
 const num_of_bars = 50;
 const lc = document.querySelector("#lyric_container");
 const fi = document.querySelector("input[type='file']");
-
+const ctxc = [];
+const canvases = document.querySelectorAll(".bar_container");
+canvases.forEach(bc => ctxc.push(bc.getContext("2d")));
+const cWidth = canvases[0].width, cHeight = canvases[0].height;
 let difMusic = false;
 
 let allDiv = "";
@@ -116,14 +119,6 @@ const lyrics = [
 
 window.onload = _ => { loader.style.display = "none" };
 
-for (let i = 0; i < num_of_bars; i++) {
-    allDiv += `<div class="bar _${i}"></div>`;
-}
-
-barContainers.forEach(bc => {
-    bc.innerHTML = allDiv;
-});
-
 let totalMin = null, totalSec = null;
 av.addEventListener("canplaythrough", _ => {
     totalSec = av.duration % 60;
@@ -141,15 +136,21 @@ const play = _ => {
     analyzer.connect(ctx.destination);
     analyzer.fftSize = 128;
     const frequencyData = new Uint8Array(analyzer.frequencyBinCount);
+    ctxc.forEach(c => {
+        c.shadowBlur = 15;
+        c.shadowColor = "lightgray";
+        c.fillStyle = "white";
+    })
 
     const renderFrame = _ => {
         analyzer.getByteFrequencyData(frequencyData);
+        ctxc.forEach(c => c.clearRect(0, 0, cWidth, cHeight));
         for (let i = 0; i <= num_of_bars; i++) {
             const fd = frequencyData[i];
-            const bars = document.querySelectorAll(".bar._" + i);
-            if (!bars) continue;
-            const barHeight = fd * 0.3 || 0;
-            bars.forEach(b => { b.style.height = barHeight + "px" });
+            const barHeight = fd * 0.5 || 0;
+            ctxc.forEach(c => {
+                c.fillRect(6 * i, cHeight - barHeight, 5, barHeight);
+            });
         }
         wrapper.style.transform = `translate(-50%, -50%) scale(${Math.min(1.5, Math.max(1, frequencyData[1] * 0.006))})`;
         requestAnimationFrame(renderFrame);
