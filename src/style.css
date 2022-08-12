@@ -137,8 +137,6 @@ main .bars_and_info .bar_container {
     width: 100%;
     height: 100px;
     transform-origin: bottom center;
-    display: flex;
-    align-items: flex-end;
 }
 
 main .bars_and_info .bar_container._1 {
